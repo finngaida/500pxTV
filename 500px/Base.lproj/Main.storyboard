@@ -2,33 +2,67 @@
 <document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9046" systemVersion="15A284" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Popular-->
         <scene sceneID="nbf-Um-YzW">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UHb-o5-5rc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="HnX-Sp-nJc" customClass="PopularCollectionViewController" customModule="_00px" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LvM-Se-7Us">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ddF-yz-bwM">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="314" height="348"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="50" minY="50" maxX="0.0" maxY="70"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="aoh-C3-TCu">
-                                <rect key="frame" x="0.0" y="140" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="piccell" id="aoh-C3-TCu" customClass="PicCell" customModule="_00px" customModuleProvider="target">
+                                <rect key="frame" x="50" y="190" width="314" height="348"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="314" height="348"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Brf-bk-eo1">
+                                            <rect key="frame" x="8" y="314" width="298" height="21"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="qlI-zB-PLg"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageWhenAncestorFocused="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ERF-R0-7au">
+                                            <rect key="frame" x="8" y="8" width="298" height="298"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="ERF-R0-7au" secondAttribute="height" multiplier="1:1" id="ePN-Wa-jTh"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
                                     <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstItem="Brf-bk-eo1" firstAttribute="leading" secondItem="aoh-C3-TCu" secondAttribute="leadingMargin" id="6Gk-dk-Ozi"/>
+                                    <constraint firstItem="ERF-R0-7au" firstAttribute="leading" secondItem="aoh-C3-TCu" secondAttribute="leadingMargin" id="LhC-bQ-63X"/>
+                                    <constraint firstItem="ERF-R0-7au" firstAttribute="top" secondItem="aoh-C3-TCu" secondAttribute="topMargin" id="Rtb-Fh-pUI"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="ERF-R0-7au" secondAttribute="trailing" id="c1H-PY-pXc"/>
+                                    <constraint firstItem="Brf-bk-eo1" firstAttribute="trailing" secondItem="aoh-C3-TCu" secondAttribute="trailingMargin" id="gCJ-cY-Qtk"/>
+                                    <constraint firstItem="Brf-bk-eo1" firstAttribute="top" secondItem="ERF-R0-7au" secondAttribute="bottom" constant="8" id="w9N-XK-VLV"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="ERF-R0-7au" id="uGw-8P-dZp"/>
+                                    <outlet property="label" destination="Brf-bk-eo1" id="mhg-yb-BwQ"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -38,13 +72,13 @@
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Popular" id="e0C-uh-wxk"/>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UHb-o5-5rc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2523" y="-671"/>
         </scene>
         <!--Fresh-->
         <scene sceneID="7CZ-P0-9jF">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZPJ-kD-p0r" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="0Ub-Fu-X2Z" customClass="FreshCollectionViewController" customModule="_00px" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="r3s-YP-MjT">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
@@ -76,13 +110,13 @@
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Fresh" id="tKp-uJ-b9z"/>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZPJ-kD-p0r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2521" y="543"/>
         </scene>
         <!--Upcoming-->
         <scene sceneID="m2h-KL-kXp">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jkn-nT-hjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="VoC-au-gfo" customClass="UpcomingCollectionViewController" customModule="_00px" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ydf-Xf-7yF">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
@@ -114,13 +148,13 @@
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Upcoming" id="5d6-TC-rjB"/>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jkn-nT-hjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2489" y="1743"/>
         </scene>
         <!--Editors-->
         <scene sceneID="zqn-4o-CbY">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gdd-YU-YMg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="yZ4-bA-25L" customClass="EditorCollectionViewController" customModule="_00px" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ahh-Ly-lW8">
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
@@ -152,13 +186,13 @@
                     </collectionView>
                     <tabBarItem key="tabBarItem" title="Editors" id="ARc-91-xC5"/>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gdd-YU-YMg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2513" y="2919"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
                 <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
@@ -174,7 +208,6 @@
                         <segue destination="yZ4-bA-25L" kind="relationship" relationship="viewControllers" id="az0-LP-pGv"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32" y="1136"/>
         </scene>

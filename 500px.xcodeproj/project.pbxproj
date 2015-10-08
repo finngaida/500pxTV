@@ -20,6 +20,7 @@
 		C5AF44DD1BC3C2E100B0B0C9 /* FreshCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AF44DC1BC3C2E100B0B0C9 /* FreshCollectionViewController.swift */; };
 		C5AF44DF1BC3C2E700B0B0C9 /* UpcomingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AF44DE1BC3C2E700B0B0C9 /* UpcomingCollectionViewController.swift */; };
 		C5AF44E11BC3C2ED00B0B0C9 /* EditorCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AF44E01BC3C2ED00B0B0C9 /* EditorCollectionViewController.swift */; };
+		C5F1689C1BC6B7D500CDB607 /* PicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F1689B1BC6B7D500CDB607 /* PicCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		C5AF44DC1BC3C2E100B0B0C9 /* FreshCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreshCollectionViewController.swift; sourceTree = "<group>"; };
 		C5AF44DE1BC3C2E700B0B0C9 /* UpcomingCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingCollectionViewController.swift; sourceTree = "<group>"; };
 		C5AF44E01BC3C2ED00B0B0C9 /* EditorCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorCollectionViewController.swift; sourceTree = "<group>"; };
+		C5F1689B1BC6B7D500CDB607 /* PicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			children = (
 				C5AF44C91BC3BAAE00B0B0C9 /* AppDelegate.swift */,
 				C59F3DC91BC430C800D139D0 /* Network.swift */,
+				C5F1689B1BC6B7D500CDB607 /* PicCell.swift */,
 				C556D5D91BC54C64007037C1 /* BaseCollectionViewController.swift */,
 				C5AF44DA1BC3C2D200B0B0C9 /* PopularCollectionViewController.swift */,
 				C5AF44DC1BC3C2E100B0B0C9 /* FreshCollectionViewController.swift */,
@@ -251,6 +254,7 @@
 				C556D5DA1BC54C64007037C1 /* BaseCollectionViewController.swift in Sources */,
 				C5AF44E11BC3C2ED00B0B0C9 /* EditorCollectionViewController.swift in Sources */,
 				C5AF44DB1BC3C2D200B0B0C9 /* PopularCollectionViewController.swift in Sources */,
+				C5F1689C1BC6B7D500CDB607 /* PicCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

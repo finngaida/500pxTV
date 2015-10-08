@@ -14,7 +14,8 @@ class PopularCollectionViewController: BaseCollectionViewController {
         self.feature = "popular"
         
         super.viewDidLoad()
-        
+    
     }
+    
 
 }

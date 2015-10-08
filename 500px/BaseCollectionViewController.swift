@@ -8,20 +8,25 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "piccell"
 
 class BaseCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var photos:Array<AnyObject>?
-    var feature = "SUBCLASS AND SET FEATURE HERE"
+    var feature = "popular"
     var pages = 1
     var spinner:UIActivityIndicatorView?
+    
+    override var preferredFocusedView: UIView? {
+        self.setNeedsFocusUpdate()
+        self.updateFocusIfNeeded()
+        return self.collectionView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.remembersLastFocusedIndexPath = true
         // Do any additional setup after loading the view.
         
@@ -44,7 +49,7 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     
     func reload() {
         
-        if (feature != "SUBCLASS AND SET FEATURE HERE") {
+        if (feature != "SUBCLASS_AND_SET_FEATURE_HERE") {
             Network().getPhotos(feature, sort: "created_at", imageSize: 3, pages: pages) { (dict) -> () in
                 self.photos = dict
                 self.pages++
@@ -75,12 +80,16 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return photos?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(self.view.frame.width/15, 20, 20, 20)
+        let p:CGFloat = 40
+        return UIEdgeInsetsMake(self.view.frame.width/15 + p, p, p*1.5, p)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 40
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -88,14 +97,16 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+        return collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+    }
+    
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
         let photo = photos![indexPath.row]["image_url"] as! String
-        
-        // Configure the cell
-        let img = UIImageView(frame: CGRectMake(0, 0, cell.frame.width, cell.frame.height))
+        let user = photos![indexPath.row]["user"]!!["fullname"] as! String
         
         do {
+            
             let url = NSURL(string: photo)
             let data = try NSData(contentsOfURL: url!, options: NSDataReadingOptions.DataReadingMappedIfSafe)
             let im = UIImage(data: data)
@@ -105,14 +116,12 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
                 Network().check(im!, number: indexPath.row)
             }
             
-            img.image = im!
+            (cell as? PicCell)?.setImage(im!, title: user)
+            
         } catch {
             print("error here: \(error)")
         }
         
-        cell.contentView.addSubview(img)
-        
-        return cell
     }
     
     // MARK: UICollectionViewDelegate
@@ -134,23 +143,23 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
         let _ = (context.focusHeading.rawValue == 1) ? "Up" : (context.focusHeading.rawValue == 2) ? "Down" : (context.focusHeading.rawValue == 4) ? "Left" : (context.focusHeading.rawValue == 8) ? "Right" : "WTF"
         
-        if let lastcell = context.previouslyFocusedView as? UICollectionViewCell {
-            coordinator.addCoordinatedAnimations({ () -> Void in
-                
-                //                lastcell.contentView.frame = CGRectMake(0, 0, lastcell.contentView.frame.width/0.8, lastcell.contentView.frame.height/0.8)
-                lastcell.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                
-                }, completion: { () -> Void in})
-        }
-        
-        if let nextcell = context.nextFocusedView as? UICollectionViewCell {
-            coordinator.addCoordinatedAnimations({ () -> Void in
-                
-                //                nextcell.contentView.frame = CGRectMake(nextcell.contentView.frame.width*0.1, nextcell.contentView.frame.height*0.1, nextcell.contentView.frame.width*0.8, nextcell.contentView.frame.height*0.8)
-                nextcell.transform = CGAffineTransformMakeScale(0.8, 0.8)
-                
-                }, completion: { () -> Void in})
-        }
+//        if let lastcell = context.previouslyFocusedView as? UICollectionViewCell {
+//            coordinator.addCoordinatedAnimations({ () -> Void in
+//                
+//                //                lastcell.contentView.frame = CGRectMake(0, 0, lastcell.contentView.frame.width/0.8, lastcell.contentView.frame.height/0.8)
+//                lastcell.transform = CGAffineTransformMakeScale(1.0, 1.0)
+//                
+//                }, completion: { () -> Void in})
+//        }
+//        
+//        if let nextcell = context.nextFocusedView as? UICollectionViewCell {
+//            coordinator.addCoordinatedAnimations({ () -> Void in
+//                
+//                //                nextcell.contentView.frame = CGRectMake(nextcell.contentView.frame.width*0.1, nextcell.contentView.frame.height*0.1, nextcell.contentView.frame.width*0.8, nextcell.contentView.frame.height*0.8)
+//                nextcell.transform = CGAffineTransformMakeScale(0.8, 0.8)
+//                
+//                }, completion: { () -> Void in})
+//        }
         
     }
     
