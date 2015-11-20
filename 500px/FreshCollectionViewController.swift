@@ -17,4 +17,8 @@ class FreshCollectionViewController: BaseCollectionViewController {
         
     }
     
+    override func delegateCall(sender: NSNotification) {
+        super.delegateCall(sender)
+    }
+    
 }

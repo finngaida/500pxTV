@@ -16,5 +16,9 @@ class EditorCollectionViewController: BaseCollectionViewController {
         super.viewDidLoad()
         
     }
+ 
+    override func delegateCall(sender: NSNotification) {
+        super.delegateCall(sender)
+    }
     
 }

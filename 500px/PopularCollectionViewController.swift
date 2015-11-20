@@ -17,5 +17,8 @@ class PopularCollectionViewController: BaseCollectionViewController {
     
     }
     
-
+    override func delegateCall(sender: NSNotification) {
+        super.delegateCall(sender)
+    }
+    
 }

@@ -17,4 +17,8 @@ class UpcomingCollectionViewController: BaseCollectionViewController {
         
     }
     
+    override func delegateCall(sender: NSNotification) {
+        super.delegateCall(sender)
+    }
+    
 }

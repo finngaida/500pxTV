@@ -13,15 +13,16 @@ private let reuseIdentifier = "piccell"
 class BaseCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var photos:Array<AnyObject>?
-    var feature = "popular"
+    var feature = "SUBCLASS_AND_SET_FEATURE_HERE"
     var pages = 1
     var spinner:UIActivityIndicatorView?
+    var firstLoad = false
     
-    override var preferredFocusedView: UIView? {
-        self.setNeedsFocusUpdate()
-        self.updateFocusIfNeeded()
-        return self.collectionView
-    }
+//    override var preferredFocusedView: UIView? {
+//        self.setNeedsFocusUpdate()
+//        self.updateFocusIfNeeded()
+//        return self.collectionView
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
         // Register cell classes
         self.collectionView?.remembersLastFocusedIndexPath = true
         // Do any additional setup after loading the view.
+//        self.view.backgroundColor = UIColor(white: 0.2, alpha: 0.5)
         
         self.spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
         self.spinner?.center = self.view.center
@@ -36,10 +38,19 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
         self.view.addSubview(self.spinner!)
         self.spinner?.startAnimating()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "delegateCall:", name: "topShelfOpen", object: nil)
+        
+        firstLoad = true
+        
     }
     
     override func viewDidAppear(animated: Bool) {
-        reload()
+        
+        if (firstLoad) {
+            reload()
+        }
+        
+        firstLoad = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,9 +66,20 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
                 self.pages++
                 self.collectionView?.reloadData()
                 
+//                print(dict)
+                
                 self.spinner?.stopAnimating()
                 self.spinner?.removeFromSuperview()
             }
+        }
+    }
+    
+    func delegateCall(sender: NSNotification) {
+        
+        print(sender.object!)
+        
+        if let number = sender.object {
+            self.performSegueWithIdentifier("showDetail", sender: number)
         }
     }
     
@@ -102,7 +124,10 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
+//        if (indexPath.row == 0) {print(photos![0])}
+        
         let photo = photos![indexPath.row]["image_url"] as! String
+        let name = photos![indexPath.row]["name"] as! String
         let user = photos![indexPath.row]["user"]!!["fullname"] as! String
         
         do {
@@ -112,11 +137,11 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
             let im = UIImage(data: data)
             
             // save first 5 to file for top shelf imagery
-            if (indexPath.row < 5) {
-                Network().check(im!, number: indexPath.row)
+            if (indexPath.row < 15) {
+                Network().check(photo, number: indexPath.row)
             }
             
-            (cell as? PicCell)?.setImage(im!, title: user)
+            (cell as? PicCell)?.setImage(im!, title: name, artist: user)
             
         } catch {
             print("error here: \(error)")
@@ -164,7 +189,9 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print("should show detail here")
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+            self.performSegueWithIdentifier("showDetail", sender: indexPath.row)
+        }
     }
     
     override func collectionView(collectionView: UICollectionView, shouldUpdateFocusInContext context: UICollectionViewFocusUpdateContext) -> Bool {
@@ -175,6 +202,17 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
         
         if (scrollView.contentOffset.y >= scrollView.contentSize.height-1100) {
             reload()
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showDetail") {
+            
+            let dest = segue.destinationViewController as? DetailViewController
+            
+            let index = Int("\(sender!)")
+            dest?.photo = photos![index!] as? NSDictionary
+            
         }
     }
     
