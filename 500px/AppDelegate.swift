@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        NSNotificationCenter.defaultCenter().postNotificationName("topShelfOpen", object: url.host!)
+        NSNotificationCenter.defaultCenter().postNotificationName("topShelfOpen", object: [1, url.host!])
         return true
     }
     

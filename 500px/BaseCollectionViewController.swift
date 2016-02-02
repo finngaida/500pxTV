@@ -18,11 +18,11 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     var spinner:UIActivityIndicatorView?
     var firstLoad = false
     
-//    override var preferredFocusedView: UIView? {
-//        self.setNeedsFocusUpdate()
-//        self.updateFocusIfNeeded()
-//        return self.collectionView
-//    }
+    //    override var preferredFocusedView: UIView? {
+    //        self.setNeedsFocusUpdate()
+    //        self.updateFocusIfNeeded()
+    //        return self.collectionView
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
         // Register cell classes
         self.collectionView?.remembersLastFocusedIndexPath = true
         // Do any additional setup after loading the view.
-//        self.view.backgroundColor = UIColor(white: 0.2, alpha: 0.5)
+        //        self.view.backgroundColor = UIColor(white: 0.2, alpha: 0.5)
         
         self.spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
         self.spinner?.center = self.view.center
@@ -66,7 +66,7 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
                 self.pages++
                 self.collectionView?.reloadData()
                 
-//                print(dict)
+                //                print(dict)
                 
                 self.spinner?.stopAnimating()
                 self.spinner?.removeFromSuperview()
@@ -124,7 +124,7 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         
-//        if (indexPath.row == 0) {print(photos![0])}
+        //        if (indexPath.row == 0) {print(photos![0])}
         
         let photo = photos![indexPath.row]["image_url"] as! String
         let name = photos![indexPath.row]["name"] as! String
@@ -136,7 +136,7 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
             let data = try NSData(contentsOfURL: url!, options: NSDataReadingOptions.DataReadingMappedIfSafe)
             let im = UIImage(data: data)
             
-            // save first 5 to file for top shelf imagery
+            // save first 15 to file for top shelf imagery
             if (indexPath.row < 15) {
                 Network().check(photo, number: indexPath.row)
             }
@@ -168,29 +168,29 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
         let _ = (context.focusHeading.rawValue == 1) ? "Up" : (context.focusHeading.rawValue == 2) ? "Down" : (context.focusHeading.rawValue == 4) ? "Left" : (context.focusHeading.rawValue == 8) ? "Right" : "WTF"
         
-//        if let lastcell = context.previouslyFocusedView as? UICollectionViewCell {
-//            coordinator.addCoordinatedAnimations({ () -> Void in
-//                
-//                //                lastcell.contentView.frame = CGRectMake(0, 0, lastcell.contentView.frame.width/0.8, lastcell.contentView.frame.height/0.8)
-//                lastcell.transform = CGAffineTransformMakeScale(1.0, 1.0)
-//                
-//                }, completion: { () -> Void in})
-//        }
-//        
-//        if let nextcell = context.nextFocusedView as? UICollectionViewCell {
-//            coordinator.addCoordinatedAnimations({ () -> Void in
-//                
-//                //                nextcell.contentView.frame = CGRectMake(nextcell.contentView.frame.width*0.1, nextcell.contentView.frame.height*0.1, nextcell.contentView.frame.width*0.8, nextcell.contentView.frame.height*0.8)
-//                nextcell.transform = CGAffineTransformMakeScale(0.8, 0.8)
-//                
-//                }, completion: { () -> Void in})
-//        }
+        //        if let lastcell = context.previouslyFocusedView as? UICollectionViewCell {
+        //            coordinator.addCoordinatedAnimations({ () -> Void in
+        //                
+        //                //                lastcell.contentView.frame = CGRectMake(0, 0, lastcell.contentView.frame.width/0.8, lastcell.contentView.frame.height/0.8)
+        //                lastcell.transform = CGAffineTransformMakeScale(1.0, 1.0)
+        //                
+        //                }, completion: { () -> Void in})
+        //        }
+        //        
+        //        if let nextcell = context.nextFocusedView as? UICollectionViewCell {
+        //            coordinator.addCoordinatedAnimations({ () -> Void in
+        //                
+        //                //                nextcell.contentView.frame = CGRectMake(nextcell.contentView.frame.width*0.1, nextcell.contentView.frame.height*0.1, nextcell.contentView.frame.width*0.8, nextcell.contentView.frame.height*0.8)
+        //                nextcell.transform = CGAffineTransformMakeScale(0.8, 0.8)
+        //                
+        //                }, completion: { () -> Void in})
+        //        }
         
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
-            self.performSegueWithIdentifier("showDetail", sender: indexPath.row)
+            self.performSegueWithIdentifier("showDetail", sender: [0, indexPath.row])
         }
     }
     
@@ -210,9 +210,21 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
             
             let dest = segue.destinationViewController as? DetailViewController
             
-            let index = Int("\(sender!)")
-            dest?.photo = photos![index!] as? NSDictionary
-            
+            if (sender![0] as! Int == 0) {
+                dest?.photo = photos?[(sender![1] as! Int)] as? NSDictionary
+            } else if (sender![0] as! Int == 1) {
+                do {
+                    dest?.photo = try Network().getPhotoDictFromID(sender![1] as! String) as? NSDictionary
+                } catch {
+                    print("error: \(error)")
+                    
+                    let alert = UIAlertController(title: "An error ocurred", message: "For some reason that image couldn't be loaded. Try again in a moment or keep on browsing, sorry for the inconvenience.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: { () -> Void in
+                        
+                    })
+                }
+            }
         }
     }
     

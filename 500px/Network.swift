@@ -68,12 +68,30 @@ class Network: NSObject {
         }
     }
     
+    func getPhotoDictFromID(id: String) throws -> AnyObject {
+        let url = "https://api.500px.com/v1/photos/\(id)?image_size=4&consumer_key=MFi9GRap6ormQLI5zMRvgrU7eWL5QR6JizxiKetP"
+        print("URL: \(url)")
+        
+        do {
+            let data = try NSData(contentsOfURL: NSURL(string: url)!, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+            let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+            print("JSON: \(json)")
+            
+            return json
+            
+        } catch {
+            throw Error.SomeError
+        }
+    }
+    
     func check(this: String, number: Int) {
         
-        guard let d = NSUserDefaults(suiteName: "group.finngaida.500pxtv") else {return}
+        guard let d = NSUserDefaults(suiteName: "group.finngaida.photoviewer") else {return}
         if (number > d.integerForKey("highest")) {
             d.setInteger(number, forKey: "highest")
         }
+        
+        print("writing \(this) to cache")
         
         d.setValue(this, forKey: "\(number)")
         

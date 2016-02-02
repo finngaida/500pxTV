@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var sideImageView: UIImageView!
     @IBOutlet weak var titleHeadline: UILabel!
@@ -31,9 +31,14 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print(photo)
         // Do any additional setup after loading the view.
-        if let p = photo {
+        if var p = photo {
+            
+            if (p["photo"] != nil) {
+                p = p["photo"] as! NSDictionary
+            }
             
             titleLabel.text = p["name"] as? String ?? "no title"
             cameraLabel.text = p["camera"] as? String ?? "no camera"
@@ -45,9 +50,9 @@ class DetailViewController: UIViewController {
                 apertureLabelText = "ƒ/\(aperture)"
             }
             
-//                if let focal = p["focal_length"] as? String where focal.characters.count > 0 {
-//                    apertureLabelText += " | \(focal)mm"
-//                }
+            //                if let focal = p["focal_length"] as? String where focal.characters.count > 0 {
+            //                    apertureLabelText += " | \(focal)mm"
+            //                }
             
             if let speed = p["shutter_speed"] as? String where speed.characters.count > 0 {
                 apertureLabelText += " | \(speed)s"
@@ -82,23 +87,31 @@ class DetailViewController: UIViewController {
             } else {
                 print("WTF?")
             }
+        } else {
+            
+            let alert = UIAlertController(title: "An error ocurred", message: "For some reason that image couldn't be loaded. Try again in a moment or keep on browsing, sorry for the inconvenience.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: { () -> Void in
+                
+            })
+            
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

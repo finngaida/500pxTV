@@ -58,7 +58,7 @@
 		C5A69ED81BC4FE87008AEE2A /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		C5A69EDA1BC4FE87008AEE2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5A9CCC81BF0E610005591D6 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		C5AF44C61BC3BAAE00B0B0C9 /* 500px.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 500px.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5AF44C61BC3BAAE00B0B0C9 /* Photo Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5AF44C91BC3BAAE00B0B0C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5AF44D01BC3BAAE00B0B0C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C5AF44D21BC3BAAE00B0B0C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		C5AF44C71BC3BAAE00B0B0C9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C5AF44C61BC3BAAE00B0B0C9 /* 500px.app */,
+				C5AF44C61BC3BAAE00B0B0C9 /* Photo Viewer.app */,
 				C5A69ED31BC4FE87008AEE2A /* 500px TV.appex */,
 			);
 			name = Products;
@@ -166,9 +166,9 @@
 			productReference = C5A69ED31BC4FE87008AEE2A /* 500px TV.appex */;
 			productType = "com.apple.product-type.tv-app-extension";
 		};
-		C5AF44C51BC3BAAE00B0B0C9 /* 500px */ = {
+		C5AF44C51BC3BAAE00B0B0C9 /* Photo Viewer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C5AF44D71BC3BAAE00B0B0C9 /* Build configuration list for PBXNativeTarget "500px" */;
+			buildConfigurationList = C5AF44D71BC3BAAE00B0B0C9 /* Build configuration list for PBXNativeTarget "Photo Viewer" */;
 			buildPhases = (
 				C5AF44C21BC3BAAE00B0B0C9 /* Sources */,
 				C5AF44C31BC3BAAE00B0B0C9 /* Frameworks */,
@@ -180,9 +180,9 @@
 			dependencies = (
 				C5A69EDC1BC4FE87008AEE2A /* PBXTargetDependency */,
 			);
-			name = 500px;
+			name = "Photo Viewer";
 			productName = 500px;
-			productReference = C5AF44C61BC3BAAE00B0B0C9 /* 500px.app */;
+			productReference = C5AF44C61BC3BAAE00B0B0C9 /* Photo Viewer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -196,7 +196,7 @@
 				TargetAttributes = {
 					C5A69ED21BC4FE87008AEE2A = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = RF278284CD;
+						DevelopmentTeam = PTHJ3DNH6P;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -205,7 +205,7 @@
 					};
 					C5AF44C51BC3BAAE00B0B0C9 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = RF278284CD;
+						DevelopmentTeam = PTHJ3DNH6P;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -227,7 +227,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C5AF44C51BC3BAAE00B0B0C9 /* 500px */,
+				C5AF44C51BC3BAAE00B0B0C9 /* Photo Viewer */,
 				C5A69ED21BC4FE87008AEE2A /* 500px TV */,
 			);
 		};
@@ -304,8 +304,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "500px TV/500px TV.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "500px TV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.finngaida.500px.500px-TV";
@@ -319,8 +319,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "500px TV/500px TV.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "500px TV/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.finngaida.500px.500px-TV";
@@ -419,8 +419,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Brand Assets";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = 500px/500px.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = 500px/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -436,8 +436,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "Brand Assets";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = 500px/500px.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = 500px/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -468,7 +468,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C5AF44D71BC3BAAE00B0B0C9 /* Build configuration list for PBXNativeTarget "500px" */ = {
+		C5AF44D71BC3BAAE00B0B0C9 /* Build configuration list for PBXNativeTarget "Photo Viewer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C5AF44D81BC3BAAE00B0B0C9 /* Debug */,

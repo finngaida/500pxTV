@@ -30,8 +30,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C5AF44C51BC3BAAE00B0B0C9"
-               BuildableName = "500px.app"
-               BlueprintName = "500px"
+               BuildableName = "Photo Viewer.app"
+               BlueprintName = "Photo Viewer"
                ReferencedContainer = "container:Photo Browser.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -72,8 +72,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C5AF44C51BC3BAAE00B0B0C9"
-            BuildableName = "500px.app"
-            BlueprintName = "500px"
+            BuildableName = "Photo Viewer.app"
+            BlueprintName = "Photo Viewer"
             ReferencedContainer = "container:Photo Browser.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -92,8 +92,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C5AF44C51BC3BAAE00B0B0C9"
-            BuildableName = "500px.app"
-            BlueprintName = "500px"
+            BuildableName = "Photo Viewer.app"
+            BlueprintName = "Photo Viewer"
             ReferencedContainer = "container:Photo Browser.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
